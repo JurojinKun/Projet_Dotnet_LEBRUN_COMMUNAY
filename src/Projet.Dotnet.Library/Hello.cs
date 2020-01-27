@@ -2,7 +2,7 @@
 using System;
 
 // Déclaration du namespace, et c'est un bloc
-namespace Isen.Dotnet.Library
+namespace Projet.Dotnet.Library
 {
     // Déclaration de la classe (ou des classes)
     

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Isen.Dotnet.Library
+namespace Projet.Dotnet.Library
 {
     public class MyCollection<T> : IList<T>
     {
