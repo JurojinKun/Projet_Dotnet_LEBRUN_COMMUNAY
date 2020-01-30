@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace Projet.Dotnet.Library.Services
 {
     public class DataInitializer : IDataInitializer
-    {
+    { 
         private List<string> _firstNames => new List<string>
         {
             "Sang", 
@@ -32,6 +32,7 @@ namespace Projet.Dotnet.Library.Services
             "Sarrazin",
             "Vu Dinh"
         };
+
         // Générateur aléatoire
         private readonly Random _random;
 
@@ -63,6 +64,24 @@ namespace Projet.Dotnet.Library.Services
             }
         }
 
+        private Role RandomRole
+        {
+            get
+            {
+                var roles = _context.RoleCollection.ToList();
+                return roles[_random.Next(roles.Count)];
+            }
+        }
+
+        private Service RandomService
+        {
+            get
+            {
+                var services = _context.ServiceCollection.ToList();
+                return services[_random.Next(services.Count)];
+            }
+        }
+
         // Générateur de date
         private DateTime RandomDate =>
             new DateTime(_random.Next(1980, 2010), 1, 1)
@@ -76,6 +95,16 @@ namespace Projet.Dotnet.Library.Services
             BirthCity = RandomCity,
             ResidenceCity = RandomCity
         };
+
+         private Personne RandomPersonne => new Personne()
+        {
+            Prenom = RandomFirstName,
+            Nom = RandomLastName,
+            Anniversaire = RandomDate,
+            TypeRole = RandomRole,
+            TypeService = RandomService
+        };
+
         // Générateur de personnes
         public List<Person> GetPersons(int size)
         {
@@ -85,6 +114,16 @@ namespace Projet.Dotnet.Library.Services
                 persons.Add(RandomPerson);
             }
             return persons;
+        }
+
+        public List<Personne> GetPersonnes(int size)
+        {
+            var personnes = new List<Personne>();
+            for(var i = 0 ; i < size ; i++)
+            {
+                personnes.Add(RandomPersonne);
+            }
+            return personnes;
         }
 
         public List<City> GetCities()
@@ -98,6 +137,29 @@ namespace Projet.Dotnet.Library.Services
                 new City { Name = "Bordeaux", Zip = "33000", Lat = 44.8637065, Lon = -0.6561808},
                 new City { Name = "Toulouse", Zip = "31000", Lat = 43.6006786, Lon = 1.3628011},
                 new City { Name = "Lille", Zip = "59000", Lat = 50.6310623, Lon = 3.0121411}
+            };
+        }
+
+        public List<Role> GetRole()
+        {
+            return new List<Role>
+            {
+                new Role { NomRole = "Utilisateur" },
+                new Role { NomRole = "Manager" },
+                new Role { NomRole = "Administrateur" },
+                new Role { NomRole = "Superadministrateur" },
+                new Role { NomRole = "PDG" },
+                new Role { NomRole = "Client" },
+                new Role { NomRole = "Assistant" }
+            };
+        }
+
+        public List<Service> GetService()
+        {
+            return new List<Service>
+            {
+                new Service { NomService = "Marketing" },
+                new Service { NomService = "Production"}
             };
         }
 
@@ -133,6 +195,33 @@ namespace Projet.Dotnet.Library.Services
             if (_context.CityCollection.Any()) return;
             var cities = GetCities();
             _context.AddRange(cities);
+            _context.SaveChanges();
+        }
+
+        public void AddPersonnes()
+        {
+            _logger.LogWarning("Adding personnes...");
+            if (_context.PersonneCollection.Any()) return;
+            var personnes = GetPersonnes(50);
+            _context.AddRange(personnes);
+            _context.SaveChanges();
+        }
+
+        public void AddRoles()
+        {
+            _logger.LogWarning("Adding roles...");
+            if (_context.RoleCollection.Any()) return;
+            var roles = GetRole();
+            _context.AddRange(roles);
+            _context.SaveChanges();
+        }
+
+        public void AddServices()
+        {
+            _logger.LogWarning("Adding services...");
+            if (_context.ServiceCollection.Any()) return;
+            var services = GetService();
+            _context.AddRange(services);
             _context.SaveChanges();
         }
     }

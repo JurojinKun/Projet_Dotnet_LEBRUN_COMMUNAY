@@ -9,6 +9,10 @@ namespace Projet.Dotnet.Library.Context
         // Listes des classes modèle / tables
         public DbSet<Person> PersonCollection { get; set; }
         public DbSet<City> CityCollection { get; set; }
+        public DbSet<Personne> PersonneCollection { get; set; }
+        public DbSet<Role> RoleCollection { get; set; }
+        public DbSet<Service> ServiceCollection { get; set; }
+
 
         public ApplicationDbContext(
             [NotNullAttribute] DbContextOptions options) : 
@@ -48,6 +52,37 @@ namespace Projet.Dotnet.Library.Context
                 .Entity<City>()
                 .ToTable(nameof(City))
                 .HasKey(c => c.Id);
+
+            modelBuilder
+                .Entity<Personne>()
+                .ToTable(nameof(Personne))
+                .HasOne(pe => pe.TypeRole)
+                .WithMany()
+                .HasForeignKey(pe => pe.TypeRoleId);
+          
+            modelBuilder.Entity<Personne>()
+                .HasOne(pe => pe.TypeService)
+                .WithMany()
+                .HasForeignKey(pe => pe.TypeServiceId);
+            
+            modelBuilder.Entity<Personne>()
+                .HasKey(p => p.Id);
+
+            modelBuilder
+                .Entity<Role>()
+                .ToTable(nameof(Role))
+                .HasKey(r => r.Id);
+
+            modelBuilder
+                .Entity<Service>()
+                .ToTable(nameof(Service))
+                .HasKey(s => s.Id);
+
+
+
+            
+
+            
         }
 
     }

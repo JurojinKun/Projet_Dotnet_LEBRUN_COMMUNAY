@@ -28,7 +28,10 @@ namespace Projet.Dotnet.Web
                 dataInitializer.DropDatabase();
                 dataInitializer.CreateDatabase();
                 dataInitializer.AddCities();
+                dataInitializer.AddRoles();
+                dataInitializer.AddServices();
                 dataInitializer.AddPersons();
+                dataInitializer.AddPersonnes();
             }
             // l'exécuter
             host.Run(); // Loop d'exécution et d'écoute du serveur web
