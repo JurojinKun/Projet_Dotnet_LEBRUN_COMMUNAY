@@ -27,10 +27,8 @@ namespace Projet.Dotnet.Web
                     .ServiceProvider.GetService<IDataInitializer>();
                 dataInitializer.DropDatabase();
                 dataInitializer.CreateDatabase();
-                dataInitializer.AddCities();
                 dataInitializer.AddRoles();
                 dataInitializer.AddServices();
-                dataInitializer.AddPersons();
                 dataInitializer.AddPersonnes();
             }
             // l'exécuter
