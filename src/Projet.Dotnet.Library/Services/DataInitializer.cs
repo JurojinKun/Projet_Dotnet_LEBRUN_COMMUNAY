@@ -94,16 +94,27 @@ namespace Projet.Dotnet.Library.Services
             new DateTime(_random.Next(1980, 2010), 1, 1)
                 .AddDays(_random.Next(0, 365));
 
-         private Personne RandomPersonne => new Personne()
+         private Personne RandomPersonne
         {
-            Prenom = RandomFirstName,
-            Nom = RandomLastName,
-            Anniversaire = RandomDate,
-            Telephone = RandomTelephone,
-            Mail = $"{RandomFirstName}.{RandomLastName}@{RandomMail}",
-            TypeRole = RandomRole,
-            TypeService = RandomService
-        };
+            get 
+            {
+                var prenom = RandomFirstName;
+                var nom = RandomLastName;
+                var personne = new Personne() {
+                    Prenom = prenom,
+                    Nom = nom,
+                    Anniversaire = RandomDate,
+                 Telephone = RandomTelephone,
+                    Mail = $"{prenom}.{nom}@{RandomMail}",
+                    TypeRole = RandomRole,
+                    TypeService = RandomService
+
+                };
+
+                return personne;
+            }
+            
+        }
 
         public List<Personne> GetPersonnes(int size)
         {
