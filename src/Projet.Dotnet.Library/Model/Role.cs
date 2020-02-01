@@ -2,6 +2,7 @@ namespace Projet.Dotnet.Library.Model
 {
     public class Role : BaseEntity
     {
+
         public string NomRole {get;set;}
 
         //public Personne Personne {get;set;}

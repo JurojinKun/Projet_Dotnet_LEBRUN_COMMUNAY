@@ -10,7 +10,6 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nom</th>
-                <th scope="col">Action...</th>
             </tr>
         </thead>
         <tbody>
@@ -19,16 +18,6 @@
             <tr>
                 <th scope="row">@service.Id</th>
                 <td>@service.NomService</td>
-                <td>
-                    <a class="btn btn-outline-primary"
-                        asp-controller="Service"
-                        asp-action="Edit"
-                        asp-route-id="@service.Id">Modifier</a>
-                    <a class="btn btn-outline-danger"
-                        asp-controller="Service"
-                        asp-action="Delete"
-                        asp-route-id="@service.Id">Supprimer</a>
-                </td>
             </tr>
             }
         </tbody>
