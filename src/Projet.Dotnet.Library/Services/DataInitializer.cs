@@ -33,16 +33,14 @@ namespace Projet.Dotnet.Library.Services
             "Vu Dinh"
         };
 
-        private List<string> _telephone => new List<string>
-        {
-            "0615452578",
-            "0785452114"
-        };
-
         private List<string> _mail => new List<string>
         {
-            "random1@gmail.com",
-            "random2@gmail.com"
+            "gmail.com",
+            "yahoo.com",
+            "live.fr",
+            "wanadoo.com",
+            "hotmail.fr"
+
         };
 
         // Générateur aléatoire
@@ -67,8 +65,8 @@ namespace Projet.Dotnet.Library.Services
         private string RandomLastName => 
             _lastNames[_random.Next(_lastNames.Count)];
 
-        private string RandomTelephone => 
-            _telephone[_random.Next(_telephone.Count)];
+        private string RandomTelephone =>
+            "06" + _random.Next(10000000, 99999999);
 
         private string RandomMail => 
             _mail[_random.Next(_mail.Count)];
@@ -102,7 +100,7 @@ namespace Projet.Dotnet.Library.Services
             Nom = RandomLastName,
             Anniversaire = RandomDate,
             Telephone = RandomTelephone,
-            Mail = RandomMail,
+            Mail = $"{RandomFirstName}.{RandomLastName}@{RandomMail}",
             TypeRole = RandomRole,
             TypeService = RandomService
         };
@@ -136,7 +134,10 @@ namespace Projet.Dotnet.Library.Services
             return new List<Service>
             {
                 new Service { NomService = "Marketing" },
-                new Service { NomService = "Production"}
+                new Service { NomService = "Production"},
+                new Service { NomService = "Direction"},
+                new Service { NomService = "Technique"},
+                new Service { NomService = "Développement"}
             };
         }
 
