@@ -43,7 +43,9 @@ Dans cette question, vous devrez enrichir les formulaires d’édition suivants,
 et la sauvegarde des différentes relations possibles :
 
 • Personne :
+
     -Service via une liste déroulante
+    
     -Rôles via une liste de cases à cocher
 
 • Rôles :
